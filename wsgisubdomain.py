@@ -1,5 +1,9 @@
 import socket
 from threading import Lock
+from __about__ import __version__, __title__, __description__
+
+__all__ = ['__version__', '__title__', '__description__',
+           'SubdomainDispatcher']
 
 
 class SubdomainDispatcher(object):

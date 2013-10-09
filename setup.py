@@ -32,6 +32,8 @@ class Test(Command):
 
     _files = ['__about__.py', 'wsgisubdomain.py']
 
+    _test_requirements = ['nose', 'disabledoc', 'coverage']
+
     @property
     def files(self):
         return ' '.join(self._files)
@@ -74,11 +76,24 @@ class Test(Command):
 
     def _get_nose_command(self):
         nosecmd = ('nosetests -v -w tests/ --all-modules '
-                   '--with-coverage --disable-docstring ')
+                   '--with-coverage --disable-docstring')
         if self.run_failed:
             nosecmd += ' --failed'
         nose = ' '.join(shlex.split(nosecmd))
         return nose
+
+    def _check_module(self, module):
+        cmd = '/usr/bin/env python -c "import {0}"'.format(module)
+        try:
+            subprocess.check_call(shlex.split(cmd))
+        except subprocess.CalledProcessError:
+            msg = 'Python package "{0}" is required to run the tests'
+            print(msg.format(module))
+            raise SystemExit(-1)
+
+    def _check_test_packages(self):
+        for m in self._test_requirements:
+            self._check_module(m)
 
     def _remove_coverage(self):
         fn = '.coverage'
@@ -86,6 +101,7 @@ class Test(Command):
             os.remove(fn)
 
     def run(self):
+        self._check_test_packages()
         cmds = [self._get_nose_command()]
         if not self.nose_only:
             self._no_print_statements()
