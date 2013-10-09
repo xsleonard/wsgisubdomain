@@ -101,10 +101,13 @@ class Test(Command):
             os.remove(fn)
 
     def run(self):
+        print('Checking test packages installed...')
         self._check_test_packages()
         cmds = [self._get_nose_command()]
         if not self.nose_only:
+            print('Checking no print statements in code...')
             self._no_print_statements()
+            print('Clearing old coverage files...')
             self._remove_coverage()
             cmds = [self.flake8] + cmds
         cmds = filter(bool, cmds)
@@ -112,11 +115,12 @@ class Test(Command):
             print('No action taken.')
             SystemExit(-2)
         for cmd in cmds:
+            print('Executing command: {0}'.format(cmd))
             c = shlex.split(cmd)
             try:
                 subprocess.check_call(c)
             except subprocess.CalledProcessError:
-                print('Command failed: {0}'.format(c))
+                print('Command failed: {0}'.format(cmd))
                 raise SystemExit(-1)
         raise SystemExit(0)
 
