@@ -10,18 +10,6 @@ class SubdomainDispatcher(object):
     Adapted from:
     http://flask.pocoo.org/docs/patterns/appdispatch/#dispatch-by-subdomain
 
-    Example app.wsgi file:
-    .. code-block:: python
-        from wsgisub import SubdomainDispatcher
-        from app import create_app
-        application = SubdomainDispatcher(create_app)
-
-    Example create_application
-    .. code-block:: python
-        def create_app(subdomain=None):
-            ''' Create your app based on subdomain '''
-            pass
-
     :param create_application: A function that accepts 'subdomain' as a
         keyword argument and returns a WSGI application.  Subdomain will be
         either an empty string for the bare domain, `None` if the request is
@@ -64,7 +52,8 @@ class SubdomainDispatcher(object):
                 self.instances[subdomain] = app
             return app
 
-    def _extract_subdomain(self, host):
+    @staticmethod
+    def _extract_subdomain(host):
         """ Returns a subdomain from a host. This host is typically the
         HTTP_HOST request envvar.  If the host is an IP address, `None` is
         returned
@@ -80,7 +69,8 @@ class SubdomainDispatcher(object):
             # It isn't an IP address, return the subdomain
             return '.'.join(host.split('.')[:-2])
 
-    def _get_host(self, environ):
+    @staticmethod
+    def _get_host(environ):
         """ Returns the true host from the request's environ.
 
         :param environ: environ variable passed to a wsgi app by wsgi

@@ -32,7 +32,7 @@ class Test(Command):
 
     _files = ['__about__.py', 'wsgisubdomain.py']
 
-    @propery
+    @property
     def files(self):
         return ' '.join(self._files)
 
@@ -104,7 +104,7 @@ class Test(Command):
 
 setup(name=about['__title__'],
       version=about['__version__'],
-      descripion=about['__description__'],
+      description=about['__description__'],
       long_description=open('README.md').read(),
       author='Steve Leonard',
       author_email='sleonard76@gmail.com',
