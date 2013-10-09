@@ -32,7 +32,7 @@ class Test(Command):
 
     _files = ['__about__.py', 'wsgisubdomain.py']
 
-    _test_requirements = ['nose', 'disabledoc', 'coverage']
+    _test_requirements = ['flake8', 'nose', 'disabledoc', 'coverage']
 
     @property
     def files(self):
