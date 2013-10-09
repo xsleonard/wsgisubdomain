@@ -111,10 +111,13 @@ class Test(Command):
         if not cmds:
             print('No action taken.')
             SystemExit(-2)
-        try:
-            list(map(subprocess.check_call, map(shlex.split, cmds)))
-        except subprocess.CalledProcessError:
-            raise SystemExit(-1)
+        for cmd in cmds:
+            c = shlex.split(cmd)
+            try:
+                subprocess.check_call(c)
+            except subprocess.CalledProcessError:
+                print('Command failed: {0}'.format(c))
+                raise SystemExit(-1)
         raise SystemExit(0)
 
 
