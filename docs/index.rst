@@ -22,7 +22,7 @@ The code in this module is adapted from:
     www.example.com is to have two separate application instances with the
     SERVER_NAME configured for each.
 
-.. _wsgisubdomain_source: https://github.com/xsleonard/pystmark
+.. _wsgisubdomain_source: https://github.com/xsleonard/wsgisubdomain
 
 .. _installation:
 

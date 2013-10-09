@@ -10,4 +10,4 @@ The code in this module is adapted from:
     http://flask.pocoo.org/docs/patterns/appdispatch/#dispatch-by-subdomain
 
 Read the complete docs:
-    https://pystmark.readthedocs.org
+    https://wsgisubdomain.readthedocs.org

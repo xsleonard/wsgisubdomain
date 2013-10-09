@@ -104,7 +104,7 @@ pygments_style = 'sphinx'
 html_theme = 'flask'
 
 html_theme_path = ['_themes']
-html_theme_options = {'github_fork': 'xsleonard/pystmark', 'index_logo': False}
+html_theme_options = {'github_fork': 'xsleonard/wsgisubdomain', 'index_logo': False}
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
