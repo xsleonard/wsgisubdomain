@@ -4,6 +4,13 @@ from wsgisubdomain import SubdomainDispatcher
 
 class TestSubdomainDispatcher(TestCase):
 
+    def assertIs(self, a, b):
+        try:
+            super(TestSubdomainDispatcher, self).assertIs(a, b)
+        except AttributeError:
+            # python 2.6 support
+            self.assertTrue(a is b)
+
     @staticmethod
     def create_app(subdomain=None):
         return lambda x, y: subdomain
