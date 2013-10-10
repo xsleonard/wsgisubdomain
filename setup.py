@@ -76,7 +76,8 @@ class Test(Command):
 
     def _get_nose_command(self):
         nosecmd = ('nosetests -v -w tests/ --all-modules '
-                   '--with-coverage --disable-docstring')
+                   '--with-coverage --disable-docstring '
+                   '--cover-erase --cover-min-percentage=100')
         if self.run_failed:
             nosecmd += ' --failed'
         nose = ' '.join(shlex.split(nosecmd))
@@ -95,11 +96,6 @@ class Test(Command):
         for m in self._test_requirements:
             self._check_module(m)
 
-    def _remove_coverage(self):
-        fn = '.coverage'
-        if os.path.exists(fn):
-            os.remove(fn)
-
     def run(self):
         print('Checking test packages installed...')
         self._check_test_packages()
@@ -107,8 +103,6 @@ class Test(Command):
         if not self.nose_only:
             print('Checking no print statements in code...')
             self._no_print_statements()
-            print('Clearing old coverage files...')
-            self._remove_coverage()
             cmds = [self.flake8] + cmds
         cmds = filter(bool, cmds)
         if not cmds:
