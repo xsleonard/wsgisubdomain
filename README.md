@@ -1,6 +1,7 @@
 wsgisubdomain
 =============
 
+[![PyPI version](https://badge.fury.io/py/wsgisubdomain.png)](http://badge.fury.io/py/wsgisubdomain)
 [![Build Status](https://travis-ci.org/xsleonard/wsgisubdomain.png)](https://travis-ci.org/xsleonard/wsgisubdomain)
 [![Coverage Status](https://coveralls.io/repos/xsleonard/wsgisubdomain/badge.png)](https://coveralls.io/r/xsleonard/wsgisubdomain)
 
